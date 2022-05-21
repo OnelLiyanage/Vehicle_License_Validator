@@ -9,7 +9,7 @@ class checkerPage extends StatefulWidget {
 
 class _checkerPageState extends State<checkerPage> {
     TextEditingController licenseNumber = TextEditingController();
-    checkValidity () {
+    checkValidity () { 
 
         String numberLicense = licenseNumber.text.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         numberLicense =numberLicense.toUpperCase();
@@ -30,7 +30,7 @@ class _checkerPageState extends State<checkerPage> {
             
             showDialog(context: context, builder: (BuildContext context){ 
                         return AlertDialog(
-                            title:  Center(
+                            title:  const Center(
                                 child: Text("Old License")
                             ),
                             content: Text('"'+numberLicense+'"'+" is an older license number.\nCompletely Valid.")
@@ -41,7 +41,7 @@ class _checkerPageState extends State<checkerPage> {
                 print("--------------------------");
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
-                        title:  Center(
+                        title:  const Center(
                             child: Text("Invalid Number")
                         ),
                         content: Text('"'+numberLicense+'"'+" is not a license number.\nCompletely Invalid.")
@@ -65,43 +65,34 @@ class _checkerPageState extends State<checkerPage> {
                 print("--------------------------");
             showDialog(context: context, builder: (BuildContext context){ 
                         return AlertDialog(
-                            title:  Center(child: Text("Old License")),
+                            title:  const Center(child: Text("Old License")),
                             content: Text('"'+numberLicense+'"'+" is an older license number.\nCompletely Valid.")
                         );
             });
             } else {
-                showDialog(context: context, builder: (BuildContext context){ 
-                    return AlertDialog(
-                        title:  Center(
-                            child: Text("Invalid Number")
-                        ),
-                        content: Text('"'+numberLicense+'"'+" is not a license number.\nCompletely Invalid.")
-                    );
-                });
-            }
-
-            if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
-                print("Modern");
+                if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
+                    print("Modern");
                 print("--------------------------");
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
-                        title:  Center(child: Text("New License")),
+                        title:  const Center(child: Text("New License")),
                         content: Text('"'+numberLicense+'"'+" is an newer license number.\nCompletely Valid.")
                     );
                 });
-            } else {
-                showDialog(context: context, builder: (BuildContext context){ 
+                } else {
+                    showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
-                        title:  Center(
+                        title:  const Center(
                             child: Text("Invalid Number")
                         ),
                         content: Text('"'+numberLicense+'"'+" is not a license number.\nCompletely Invalid.")
                     );
                 });
+                }
             }
         }
 
-            //  9 digit license plate validation
+        //  9 digit license plate validation
         if (licenseLength == 9) {
 
             String sectionOne = numberLicense.substring(0,4);
@@ -113,14 +104,14 @@ class _checkerPageState extends State<checkerPage> {
                 print("--------------------------");
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
-                        title:  Center(child: Text("New License")),
+                        title:  const Center(child: Text("New License")),
                         content: Text('"'+numberLicense+'"'+" is an newer license number.\nCompletely Valid.")
                     );
                 });
             } else {
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
-                        title:  Center(
+                        title:  const Center(
                             child: Text("Invalid Number")
                         ),
                         content: Text('"'+numberLicense+'"'+" is not a license number.\nCompletely Invalid.")
@@ -131,13 +122,47 @@ class _checkerPageState extends State<checkerPage> {
             print("Not in range for 9");
             print("--------------------------");
         }
+
+        //  10 digit vintage license plate validation
+        if (licenseLength == 10) {
+
+            String sectionOne = numberLicense.substring(0,2);
+            String sectionTwo = numberLicense.substring(2,6);
+            String sectionThree = numberLicense.substring(6,10);
+
+            if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[SHRI]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
+                print("Vintage");
+                print("--------------------------");
+                sectionTwo = sectionTwo.replaceAll("SHRI", "ශ්‍රී");
+                showDialog(context: context, builder: (BuildContext context){ 
+                    return AlertDialog(
+                        title:  const Center(child: Text("Vintage License")),
+                        content: Text('"'+sectionOne+sectionTwo+sectionThree+'"'+" is a vintage license number.\nCompletely Valid.")
+                    );
+                });
+            } else {
+                showDialog(context: context, builder: (BuildContext context){ 
+                    return AlertDialog(
+                        title:  const Center(
+                            child: Text("Invalid Number")
+                        ),
+                        content: Text('"'+numberLicense+'"'+" is not a license number.\nCompletely Invalid.")
+                    );
+                });
+            }
+        } else {
+            print("Not in range for 9");
+            print("--------------------------");
+        }
+
+
     }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar (
-        title: Text (
+        title: const Text (
           "Registration Validation",
           style: TextStyle (
             color: Colors.white,
@@ -153,6 +178,7 @@ class _checkerPageState extends State<checkerPage> {
             child: Column (
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                    Text("If the number contains 'xxශ්‍රීxxxx' type it as 'xxSHRIxxxx'. "),
                     Form (
                         child: Column (
                             children: [
@@ -172,6 +198,10 @@ class _checkerPageState extends State<checkerPage> {
                     GestureDetector(
                         onTap: () {
                             checkValidity();
+                            FocusScopeNode currentFocus = FocusScope.of(context);
+                            if ( !currentFocus.hasPrimaryFocus ) {
+                                currentFocus.unfocus();
+                            }
                         },
                         child: Container(
                             alignment: Alignment.center,
