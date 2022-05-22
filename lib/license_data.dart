@@ -12,6 +12,8 @@ class License {
     'license':license,
   };
 
+  static License fromJson (Map<String, dynamic> json) => License(
+    license: json['license'],
+  );
   
-
 }
