@@ -150,7 +150,7 @@ class _checkerPageState extends State<checkerPage> {
                     );
                 });
             }
-        } else {
+        } else { 
             print("Not in range for 9");
             print("--------------------------");
         }

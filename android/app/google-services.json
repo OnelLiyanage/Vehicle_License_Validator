@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1002982247856",
+    "project_id": "vehicle-registration-checker",
+    "storage_bucket": "vehicle-registration-checker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002982247856:android:25d339c5f3f08820221a75",
+        "android_client_info": {
+          "package_name": "com.example.vehicle_registration_checker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002982247856-vikugd191pkjbpq3mnaim32fks3lo2dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxrgKDLSpD-PQH6vSyYuVgqh6QKbM95Oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002982247856-vikugd191pkjbpq3mnaim32fks3lo2dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
