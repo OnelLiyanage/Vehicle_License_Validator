@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:vehicle_registration_checker/license_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,7 +31,7 @@ class _registeredNumbersState extends State<registeredNumbers> {
             stream: readUsers(),
             builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                    return Text ("There is no data to be shown");
+                    return const Text ("There is no data to be shown");
                 } else if(snapshot.hasData) {
                     final licenseNumbers = snapshot.data!;
                     return ListView(
@@ -37,7 +39,7 @@ class _registeredNumbersState extends State<registeredNumbers> {
                     );
                 } else {
                     return 
-                    Center(
+                    const Center(
                         child: Text("There is no data to be shown"),
                         );
                 }
@@ -45,6 +47,7 @@ class _registeredNumbersState extends State<registeredNumbers> {
         ),
     );
   }
+  
   Widget displayNumbers (License license) => ListTile (
         title: Padding(
           padding: const EdgeInsets.all(8.0),

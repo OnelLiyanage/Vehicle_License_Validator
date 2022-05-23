@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:vehicle_registration_checker/license_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,14 +33,27 @@ Future createRegistration({required String license}) async {
         String registrationInput = registrationInputController.text.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         registrationInput =registrationInput.toUpperCase();
         int licenseLength = registrationInput.length;
-        print(registrationInput);
-        print(licenseLength);
 
         if (licenseLength == 7 ) {
             if (registrationInput.contains(RegExp(r"^[0-9]+[0-9]+[-]+[0-9]+[0-9]+[0-9]+[0-9]"))) {
                 createRegistration(license: license);
+                showDialog(context: context, builder: (BuildContext context){ 
+                        return AlertDialog(
+                            title:  const Center(
+                                child: Text("Old License")
+                            ),
+                            content: Text('"'+registrationInput+'"'+" is now registered.")
+                        );
+                });
             } else {
-                print("invalid bitch");
+                showDialog(context: context, builder: (BuildContext context){ 
+                    return AlertDialog(
+                        title:  const Center(
+                            child: Text("Invalid Number")
+                        ),
+                        content: Text('"'+registrationInput+'"'+" is not a valid license number.")
+                    );
+                });
             }
         } else if (licenseLength == 8) {
 
@@ -48,23 +63,20 @@ Future createRegistration({required String license}) async {
 
             if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
                 createRegistration(license: license);
-                print("Old License 2");
-                print("--------------------------");
-            showDialog(context: context, builder: (BuildContext context){ 
-                        return AlertDialog(
-                            title:  const Center(child: Text("Old License")),
-                            content: Text('"'+registrationInput+'"'+" is an older license number.\nCompletely Valid.")
-                        );
-            });
+
+                showDialog(context: context, builder: (BuildContext context){ 
+                    return AlertDialog(
+                        title:  const Center(child: Text("Old License")),
+                        content: Text('"'+registrationInput+'"'+" is now registered.")
+                    );
+                });
             } else {
                 if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
                     createRegistration(license: license);
-                    print("Modern");
-                print("--------------------------");
-                showDialog(context: context, builder: (BuildContext context){ 
+                    showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
                         title:  const Center(child: Text("New License")),
-                        content: Text('"'+registrationInput+'"'+" is an newer license number.\nCompletely Valid.")
+                        content: Text('"'+registrationInput+'"'+" is now registered.")
                     );
                 });
                 } else {
@@ -73,7 +85,7 @@ Future createRegistration({required String license}) async {
                         title:  const Center(
                             child: Text("Invalid Number")
                         ),
-                        content: Text('"'+registrationInput+'"'+" is not a license number.\nCompletely Invalid.")
+                        content: Text('"'+registrationInput+'"'+" is not a valid license number.")
                     );
                 });
                 }
@@ -84,12 +96,10 @@ Future createRegistration({required String license}) async {
 
             if (registrationInput.contains(RegExp(r"^[a-zA-Z]+[P]+[a-zA-Z]+[a-zA-Z]+[-]+[0-9]+[0-9]+[0-9]+[0-9]"))) {
                 createRegistration(license: license);
-                print("Modern");
-                print("--------------------------");
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
                         title:  const Center(child: Text("New License")),
-                        content: Text('"'+registrationInput+'"'+" is an newer license number.\nCompletely Valid.")
+                        content: Text('"'+registrationInput+'"'+" is now registered.")
                     );
                 });
             } else {
@@ -98,14 +108,11 @@ Future createRegistration({required String license}) async {
                         title:  const Center(
                             child: Text("Invalid Number")
                         ),
-                        content: Text('"'+registrationInput+'"'+" is not a license number.\nCompletely Invalid.")
+                        content: Text('"'+registrationInput+'"'+" is not a valid license number.")
                     );
                 });
             }
-        } else {
-            print("Not in range for 9");
-            print("--------------------------");
-        }
+        } else { }
 
         //  10 digit vintage license plate validation
         if (licenseLength == 10) {
@@ -115,13 +122,11 @@ Future createRegistration({required String license}) async {
 
             if (registrationInput.contains(RegExp(r"^[0-9]+[0-9]+[SHRI]+[0-9]+[0-9]+[0-9]+[0-9]"))) {
                 createRegistration(license: license);
-                print("Vintage");
-                print("--------------------------");
                 characterSpecail = characterSpecail.replaceAll("SHRI", "ශ්‍රී");
                 showDialog(context: context, builder: (BuildContext context){ 
                     return AlertDialog(
                         title:  const Center(child: Text("Vintage License")),
-                        content: Text('"'+sectionOne+characterSpecail+sectionThree+'"'+" is a vintage license number.\nCompletely Valid.")
+                        content: Text('"'+sectionOne+characterSpecail+sectionThree+'"'+"is now registered.")
                     );
                 });
             } else {
@@ -130,22 +135,20 @@ Future createRegistration({required String license}) async {
                         title:  const Center(
                             child: Text("Invalid Number")
                         ),
-                        content: Text('"'+registrationInput+'"'+" is not a license number.\nCompletely Invalid.")
+                        content: Text('"'+registrationInput+'"'+" is not a valid license number.")
                     );
                 });
             }
         } else { 
-            print("Not in range for 9");
-            print("--------------------------");
+            showDialog(context: context, builder: (BuildContext context){ 
+                    return AlertDialog(
+                        title:  const Center(
+                            child: Text("Invalid Number")
+                        ),
+                        content: Text('"'+registrationInput+'"'+" is not a valid license number.\n Please check the format.")
+                    );
+                });
         }
-        
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
     }
 
 
@@ -166,86 +169,56 @@ Future createRegistration({required String license}) async {
       ),
 
     body: Container (
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
             child: Column (
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                    Text("If the number contains 'xxශ්‍රීxxxx' type it as 'xxSHRIxxxx'. "),
+                    const Text("If the number contains 'xxශ්‍රීxxxx' type it as 'xxSHRIxxxx'. "),
                     Form (
                         child: Column (
                             children: [
-                                TextFormField(
+                                TextFormField (
                                     controller: registrationInputController,
                                     decoration: const InputDecoration (
                                         hintText: "License number here."
+                                    ),
+                                ),
+                                
+                                SizedBox.fromSize(
+                                    size: const Size(56, 56), // button width and height
+                                    child: ClipOval (
+                                        child: Material (
+                                            color: Colors.green[700], // button color
+                                            child: InkWell (
+                                                splashColor: Colors.green[400], // splash color
+                                                onTap: () {
+                                                    final license = registrationInputController.text;
+                                                    validatingInput(license);
+                                                    FocusScopeNode currentFocus = FocusScope.of(context);
+                                                    if ( !currentFocus.hasPrimaryFocus ) {
+                                                        currentFocus.unfocus();
+                                                    }
+                                                    registrationInputController.clear();
+                                                }, // button pressed
+                                                child: Column (
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: const <Widget>[
+                                                        Icon(Icons.add_circle_outline_rounded), // icon
+                                                        Text("Add "), // text
+                                                    ],
+                                                ),
+                                            ),
                                         ),
-                                ),
-                                IconButton(
-                                    icon: Icon(Icons.add),   
-                                    onPressed: () {
-                                        final license = registrationInputController.text;
-                                        validatingInput(license);
-                                        // createRegistration (license: license);
-                                    }
-                                ),
-                            ] 
+                                    ),
+                                )
+                            ]
                         ),
                     ),
                     const SizedBox( height : 25.0),
-                    // StreamBuilder <List<License>>(
-                    //     stream: readUsers(),
-                    //     builder: (context, snapshot) {
-                    //         if (snapshot.hasError) {
-                    //             return Text ("There is no data to be shown");
-                    //         } else if(snapshot.hasData) {
-                    //             final licenseNumbers = snapshot.data!;
-                    //             return ListView(
-                    //                 children: licenseNumbers.map(displayNumbers).toList(),
-                    //             );
-                    //         } else {
-                    //             return Center (
-                    //                 child: CircularProgressIndicator()
-                    //             );
-                    //         }
-                    //     }
-                    // ),
-                    // GestureDetector(
-                    //     onTap: () {
-                            
-                    //         // addNumber(license: userInput);
-                    //         // checkValidity();
-                    //         FocusScopeNode currentFocus = FocusScope.of(context);
-                    //         if ( !currentFocus.hasPrimaryFocus ) {
-                    //             currentFocus.unfocus();
-                    //         }
-                    //     },
-                    //     child: Container(
-                    //         alignment: Alignment.center,
-                    //         width: MediaQuery.of(context).size.width,
-                    //         padding: const EdgeInsets.symmetric(vertical: 20),
-                    //         decoration: BoxDecoration(
-                    //             gradient: const LinearGradient (
-                    //                 colors:  [
-                    //                     Color.fromARGB(169, 49, 163, 139),
-                    //                     Color.fromARGB(178, 49, 163, 138), 
-                    //                     ]
-                    //             ),
-                    //             borderRadius: BorderRadius.circular(25)
-                    //         ),
-                    //         child: const Text (
-                    //             "Check Validity",
-                    //             style: TextStyle (
-                    //                 fontSize: 18.0,
-                    //                 color: Colors.white,
-                    //             ),
-                    //         ),
-                    //     ),
-                    // ),
                 ],
             ),
         ),
-      
     );
-  }
-  }
+}
+}

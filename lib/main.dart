@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:vehicle_registration_checker/checker_page.dart';
-import 'package:vehicle_registration_checker/registration_page.dart';
-import 'package:vehicle_registration_checker/registered_numbers.dart';
+import 'package:vehicle_registration_checker/landing_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      // home: registrationPage(),
-      home: registeredNumbers(),
+      home: landingPage(),
     );
   }
 }
