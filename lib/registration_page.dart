@@ -15,19 +15,19 @@ class _registrationPageState extends State<registrationPage> {
     final registrationInputController = TextEditingController();
 
     // ----------------
-Future createRegistration({required String license}) async {
+// Future createRegistration({required String license}) async {
     
-      final docUser = FirebaseFirestore.instance.collection('registered-numbers').doc();
+//       final docUser = FirebaseFirestore.instance.collection('registered-numbers').doc();
 
-      final licenseNumber = License(
-          id: docUser.id,
-          license: license,
-        );
+//       final licenseNumber = License(
+//           id: docUser.id,
+//           license: license,
+//         );
 
-        final json = licenseNumber.toJson();
+//         final json = licenseNumber.toJson();
 
-        await docUser.set(json);
-    }
+//         await docUser.set(json);
+//     }
 
     validatingInput (license) {
         String registrationInput = registrationInputController.text.replaceAll(RegExp(r"\s+\b|\b\s"), "");
@@ -41,8 +41,16 @@ Future createRegistration({required String license}) async {
                         return AlertDialog(
                             title:  const Center(
                                 child: Text("Old License")
-                            ),
-                            content: Text('"'+registrationInput+'"'+" is now registered.")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                Image.asset('assets/vinatage.png',
+                                    // height: 200,
+                                    fit: BoxFit.cover
+                                ),
+                                Text('"'+registrationInput+'"'+" is now registered\n gping.")
+                            ]
+                        )
                         );
                 });
             } else {
@@ -112,7 +120,7 @@ Future createRegistration({required String license}) async {
                     );
                 });
             }
-        } else { }
+        } else 
 
         //  10 digit vintage license plate validation
         if (licenseLength == 10) {
@@ -222,3 +230,16 @@ Future createRegistration({required String license}) async {
     );
 }
 }
+Future createRegistration({required String license}) async {
+    
+      final docUser = FirebaseFirestore.instance.collection('registered-numbers').doc();
+
+      final licenseNumber = License(
+          id: docUser.id,
+          license: license,
+        );
+
+        final json = licenseNumber.toJson();
+
+        await docUser.set(json);
+    }
