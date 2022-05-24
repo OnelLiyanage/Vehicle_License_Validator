@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:vehicle_registration_checker/license_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +16,7 @@ class _registeredNumbersState extends State<registeredNumbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar (
+          toolbarHeight: 70,
         title: const Text (
           "All Registration Numbers",
           style: TextStyle (
@@ -29,34 +28,46 @@ class _registeredNumbersState extends State<registeredNumbers> {
       ),
 
       body:
-      StreamBuilder <List<License>>(
-            stream: readUsers(),
-            builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                    return const Text ("There is no data to be shown");
-                } else if(snapshot.hasData) {
-                    final licenseNumbers = snapshot.data!;
-                    return Column(
-                        children: [
-                            Expanded (
-                                child: ListView (
-                                    children :  licenseNumbers.map(displayNumbers).toList(),
-                                ), 
-                            ),
-                        ],
-                    );
-                } else {
-                    return 
-                    const Center(
-                        child: Text("There is no data to be shown"),
-                    );
-                }
-            }
-        ),
+      Container(
+        decoration: const BoxDecoration (
+              gradient: LinearGradient (
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight, 
+                  colors: [
+                      Color.fromARGB(226, 214, 232, 223),
+                      Color.fromARGB(194, 253, 253, 253),
+                  ],
+              )
+          ),
+        child: StreamBuilder <List<License>>(           //streambuilder displaying a list of the data saved in License object 
+              stream: readNumbers(),
+              builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                      return const Text ("There is no data to be shown");       // error call if the database is empty or has an error
+                  } else if(snapshot.hasData) {
+                      final licenseNumbers = snapshot.data!;
+                      return Column(
+                          children: [
+                              Expanded (
+                                  child: ListView (
+                                      children :  licenseNumbers.map(optionButton).toList(),
+                                  ), 
+                              ),
+                          ],
+                      );
+                  } else {
+                      return 
+                      const Center(
+                          child: Text("There is no data to be shown"),
+                      );
+                  }
+              }
+          ),
+      ),
     );
   }
   
-  Widget displayNumbers (License license) => ListTile (
+  Widget optionButton (License license) => ListTile (
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(license.license),
@@ -65,7 +76,7 @@ class _registeredNumbersState extends State<registeredNumbers> {
             itemBuilder: (context) => [
                 PopupMenuItem ( 
                     child: const Text("Edit"),
-                    onTap: () => updateLicense(),
+                    onTap: () => const updateLicense(),
                     //  {
                     //     Navigator.push(context,MaterialPageRoute(
                     //       builder: (context) => const updateLicense()
@@ -83,19 +94,9 @@ class _registeredNumbersState extends State<registeredNumbers> {
          ),
     );
 
-  Stream<List<License>> readUsers() => FirebaseFirestore.instance
+  Stream<List<License>> readNumbers() => FirebaseFirestore.instance
     .collection('registered-numbers')
     .snapshots()
     .map((snapshot) =>
         snapshot.docs.map((doc) =>License.fromJson(doc.data())).toList());
 } 
-
-// updateNumber () {
-//     Container (
-//         child : Column (
-//         children: [
-//             const Text("Updating value"),
-//         ],
-//         )
-//     );
-// }

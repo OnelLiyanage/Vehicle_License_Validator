@@ -1,4 +1,4 @@
-class License {
+class License {         //License class with its unique id and user input with to json method to display the values returned from database.
   String id;
   final String license;
 

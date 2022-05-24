@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 
 class checkerPage extends StatefulWidget {
@@ -10,28 +8,46 @@ class checkerPage extends StatefulWidget {
 }
 
 class _checkerPageState extends State<checkerPage> {
-    TextEditingController licenseNumber = TextEditingController();
-    checkValidity () { 
 
-        String numberLicense = licenseNumber.text.replaceAll(RegExp(r"\s+\b|\b\s"), "");
-        numberLicense =numberLicense.toUpperCase();
+    TextEditingController licenseNumber = TextEditingController();      // Value entered in the form to determine date
+
+    // Function to determine type
+    checkType () { 
+
+        String numberLicense = licenseNumber.text.replaceAll(RegExp(r"\s+\b|\b\s"), "");        //removes all whitespaces from user input
+        numberLicense =numberLicense.toUpperCase();                                                             //convert user input to uppercase to eliminate futher bugs
         int licenseLength = numberLicense.length;
 
         //  7 digit license plate validation
         if (licenseLength == 7) {
-
-            String sectionOne = numberLicense.substring(0,2);
-            String sectionTwo = numberLicense.substring(2,3);
-            String sectionThree = numberLicense.substring(3,7);
-
-            if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]")) ) {
-            showDialog(context: context, builder: (BuildContext context){ 
-                        return AlertDialog(
-                            title:  const Center(
-                                child: Text("Old License")
-                            ),
-                            content: Text('"'+numberLicense+'"'+" is an older license number.")
-                        );
+            if (numberLicense.contains(RegExp(r"^[0-9]+[0-9]+[-]+[0-9]+[0-9]+[0-9]+[0-9]")) ) {         // Regular expression for valid 7 digit license numbers
+            showDialog(context: context, builder: (BuildContext context){                                                    // DialogBox with pop up 
+                        return AlertDialog (
+                        title:  const Center (
+                                child: Text("Old License Number")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                  Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left : 65.0, bottom: 20),
+                                        child: Row (
+                                          children: [
+                                            Image.asset(
+                                                'assets/old.png',
+                                                height: 80,
+                                            ), 
+                                          ],
+                                        ),
+                                      ),
+                                      Text('"'+numberLicense+'"'+" is an older license number.")
+                                    ],
+                                  ),
+                            ]
+                        )
+                    );
             });
             } else {
                 showDialog(context: context, builder: (BuildContext context){ 
@@ -43,8 +59,7 @@ class _checkerPageState extends State<checkerPage> {
                     );
                 });
             }
-        } else { }
-
+        } else 
         //  8 digit license plate validation
         if (licenseLength == 8) {
           
@@ -52,21 +67,64 @@ class _checkerPageState extends State<checkerPage> {
             String sectionTwo = numberLicense.substring(3,4);
             String sectionThree = numberLicense.substring(4,8);
 
-            if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
+            if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {         // Regular expression for Old valid 8 digit license numbers
             
             showDialog(context: context, builder: (BuildContext context){ 
-                        return AlertDialog(
-                            title:  const Center(child: Text("Old License")),
-                            content: Text('"'+numberLicense+'"'+" is an older license number.")
-                        );
+                        return AlertDialog (
+                        title:  const Center (
+                                child: Text("Old License Number")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                  Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left : 65.0, bottom: 20),
+                                        child: Row (
+                                          children: [
+                                            Image.asset(
+                                                'assets/old.png',
+                                                height: 80,
+                                            ), 
+                                          ],
+                                        ),
+                                      ),
+                                      Text('"'+numberLicense+'"'+" is an older license number.")
+                                    ],
+                                  ),
+                            ]
+                        )
+                    );
             });
             } else {
-                if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
-
+                if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {    // Regular expression for Modern valid 8 digit license numbers
                 showDialog(context: context, builder: (BuildContext context){ 
-                    return AlertDialog(
-                        title:  const Center(child: Text("New License")),
-                        content: Text('"'+numberLicense+'"'+" is an newer license number.")
+                    return AlertDialog (
+                        title:  const Center (
+                                child: Text("Modern License Number")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                  Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left : 65.0, bottom: 20),
+                                        child: Row (
+                                          children: [
+                                            Image.asset(
+                                                'assets/modern.png',
+                                                height: 80,
+                                            ), 
+                                          ],
+                                        ),
+                                      ),
+                                      Text('"'+numberLicense+'"'+" is a modern license number.")
+                                    ],
+                                  ),
+                            ]
+                        )
                     );
                 });
                 } else {
@@ -80,21 +138,37 @@ class _checkerPageState extends State<checkerPage> {
                 });
                 }
             }
-        }
-
+        } else 
         //  9 digit license plate validation
         if (licenseLength == 9) {
 
-            String sectionOne = numberLicense.substring(0,4);
-            String sectionTwo = numberLicense.substring(4,5);
-            String sectionThree = numberLicense.substring(5,9);
-
-            if (sectionOne.contains(RegExp(r"^[a-zA-Z]+[P]+[a-zA-Z]+[a-zA-Z]")) && sectionTwo.contains(RegExp(r"^[-]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
-
+            if (numberLicense.contains(RegExp(r"^[a-zA-Z]+[P]+[a-zA-Z]+[a-zA-Z]+[-]+[0-9]+[0-9]+[0-9]+[0-9]"))) {           // Regular expression for Modern valid 9 digit license numbers
                 showDialog(context: context, builder: (BuildContext context){ 
-                    return AlertDialog(
-                        title:  const Center(child: Text("New License")),
-                        content: Text('"'+numberLicense+'"'+" is an newer license number.")
+                    return AlertDialog (
+                        title:  const Center (
+                                child: Text("Modern License Number")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                  Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left : 65.0, bottom: 20),
+                                        child: Row (
+                                          children: [
+                                            Image.asset(
+                                                'assets/modern.png',
+                                                height: 80,
+                                            ), 
+                                          ],
+                                        ),
+                                      ),
+                                      Text('"'+numberLicense+'"'+" is now registered")
+                                    ],
+                                  ),
+                            ]
+                        )
                     );
                 });
             } else {
@@ -107,22 +181,44 @@ class _checkerPageState extends State<checkerPage> {
                     );
                 });
             }
-        } else { }
-
+        } else 
         //  10 digit vintage license plate validation
+        // For the vintage number plates users must enter it replacing the ශ්‍රී character with 'shri'.
         if (licenseLength == 10) {
 
             String sectionOne = numberLicense.substring(0,2);
             String sectionTwo = numberLicense.substring(2,6);
             String sectionThree = numberLicense.substring(6,10);
 
-            if (sectionOne.contains(RegExp(r"^[0-9]+[0-9]")) && sectionTwo.contains(RegExp(r"^[SHRI]")) && sectionThree.contains(RegExp(r"^[0-9]+[0-9]+[0-9]+[0-9]"))) {
+            if (numberLicense.contains(RegExp(r"^[0-9]+[0-9]+[SHRI]+[0-9]+[0-9]+[0-9]+[0-9]"))) {          // Regular expression for valid vintage license numbers
                 
                 sectionTwo = sectionTwo.replaceAll("SHRI", "ශ්‍රී");
                 showDialog(context: context, builder: (BuildContext context){ 
-                    return AlertDialog(
-                        title:  const Center(child: Text("Vintage License")),
-                        content: Text('"'+sectionOne+sectionTwo+sectionThree+'"'+" is a vintage license number.")
+                    return AlertDialog (
+                        title:  const Center (
+                                child: Text("Vintage License Number")
+                            ),  
+                            content : Stack (alignment: Alignment.center, 
+                            children : <Widget> [
+                                  Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left : 65.0, bottom: 20),
+                                        child: Row (
+                                          children: [
+                                            Image.asset(
+                                                'assets/vintage.png',
+                                                height: 80,
+                                            ), 
+                                          ],
+                                        ),
+                                      ),
+                                      Text('"'+sectionOne+sectionTwo+sectionThree+'"'+" is now registered")
+                                    ],
+                                  ),
+                            ]
+                        )
                     );
                 });
             } else {
@@ -135,13 +231,23 @@ class _checkerPageState extends State<checkerPage> {
                     );
                 });
             }
-        } else { }
+        } else {                                                                                                    // if the input doesn't satisfy any of the above it can determined as an invalid input
+            showDialog(context: context, builder: (BuildContext context){ 
+                return AlertDialog(
+                    title:  const Center(
+                        child: Text("Invalid Number")
+                    ),
+                    content: Text('"'+numberLicense+'"'+" is not a valid license number.\n Please check the format.")
+                );
+            });
+        }
     }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar (
+          toolbarHeight: 70,
         title: const Text (
           "Registration Validation",
           style: TextStyle (
@@ -153,19 +259,27 @@ class _checkerPageState extends State<checkerPage> {
       ),
 
     body: Container (
+        decoration: const BoxDecoration (
+            gradient: LinearGradient (
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight, 
+                colors: [
+                    Color.fromARGB(226, 214, 232, 223),
+                    Color.fromARGB(194, 253, 253, 253),
+                ],
+            )
+        ),
         alignment: Alignment.topCenter,
             padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 30.0),
             child: Column (
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                    const Text("If the number contains 'xxශ්‍රීxxxx' type it as 'xxSHRIxxxx'. "),
-                    Form (
+                    const Text("If the license contains 'xxශ්‍රීxxxx' type it as 'xxSHRIxxxx'. "),
+                    const SizedBox(height: 20),
+                    Form (                                                                                               // Form containg the field for user to input the license number
                         child: Column (
                             children: [
                                 TextFormField(
-                                    validator: (val) {
-                                        return val!.isEmpty || val.length < 5 ? null : "Invalid License number" ;
-                                    },
                                     controller: licenseNumber,
                                     decoration: const InputDecoration (
                                         hintText: "License number here."
@@ -174,10 +288,12 @@ class _checkerPageState extends State<checkerPage> {
                             ]
                         ),
                     ),
+
                     const SizedBox( height : 25.0),
+                    
                     GestureDetector(
                         onTap: () {
-                            checkValidity();
+                            checkType();
                             FocusScopeNode currentFocus = FocusScope.of(context);
                             if ( !currentFocus.hasPrimaryFocus ) {
                                 currentFocus.unfocus();
@@ -191,8 +307,8 @@ class _checkerPageState extends State<checkerPage> {
                             decoration: BoxDecoration(
                                 gradient: const LinearGradient (
                                     colors:  [
-                                        Color.fromARGB(169, 49, 163, 139),
-                                        Color.fromARGB(178, 49, 163, 138), 
+                                        Color.fromARGB(169, 30, 165, 111),
+                                        Color.fromARGB(218, 54, 176, 150), 
                                         ]
                                 ),
                                 borderRadius: BorderRadius.circular(25)

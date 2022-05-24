@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:vehicle_registration_checker/registered_numbers.dart';
-import 'package:vehicle_registration_checker/license_data.dart';
-import 'package:vehicle_registration_checker/license_data.dart';
+// Page for updating the the saved values in the database
 
+import 'package:flutter/material.dart';
 
 
 class updateLicense extends StatefulWidget {
@@ -20,7 +18,7 @@ class _updateLicenseState extends State<updateLicense> {
     return Scaffold(
       appBar: AppBar (
         title: const Text (
-          "All Registration Numbers",
+          "Edit Registration Numbers",
           style: TextStyle (
             color: Colors.white,
           ),
