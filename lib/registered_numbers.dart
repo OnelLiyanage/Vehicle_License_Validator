@@ -87,7 +87,9 @@ class _registeredNumbersState extends State<registeredNumbers> {
                 PopupMenuItem (
                     child: const Text ("Delete"),
                     onTap: () {
-
+                        // CollectionReference a = FirebaseFirestore.instance.collection('registered-numbers').parent as CollectionReference<Object?>;
+                        // DocumentReference firebaseFirestore = FirebaseFirestore.instance.doc('');
+                        
                     },
                 ),
             ], 

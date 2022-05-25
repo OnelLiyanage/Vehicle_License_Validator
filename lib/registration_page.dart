@@ -58,7 +58,7 @@ class _registrationPageState extends State<registrationPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+registrationInput+'"'+" is now registered")
+                                      Text('"'+registrationInput+'"'+" is now registered.")
                                     ],
                                   ),
                             ]
@@ -105,7 +105,7 @@ class _registrationPageState extends State<registrationPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+registrationInput+'"'+" is now registered")
+                                      Text('"'+registrationInput+'"'+" is now registered.")
                                     ],
                                   ),
                             ]
@@ -136,7 +136,7 @@ class _registrationPageState extends State<registrationPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+registrationInput+'"'+" is now registered")
+                                      Text('"'+registrationInput+'"'+" is now registered.")
                                     ],
                                   ),
                             ]
@@ -181,7 +181,7 @@ class _registrationPageState extends State<registrationPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+registrationInput+'"'+" is now registered")
+                                      Text('"'+registrationInput+'"'+" is now registered.")
                                     ],
                                   ),
                             ]
@@ -230,7 +230,7 @@ class _registrationPageState extends State<registrationPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+sectionOne+characterSpecial+sectionThree+'"'+" is now registered")
+                                      Text('"'+sectionOne+characterSpecial+sectionThree+'"'+" is now registered.")
                                     ],
                                   ),
                             ]
@@ -264,8 +264,8 @@ class _registrationPageState extends State<registrationPage> {
     return Scaffold(
       appBar: AppBar (
           toolbarHeight: 70,
-        title: const Text (
-          "Registration Validation",
+        title: const Text ( 
+          "New Vehicle Registration",
           style: TextStyle (
             color: Colors.white,
           ),

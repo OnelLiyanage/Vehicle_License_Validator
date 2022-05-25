@@ -164,7 +164,7 @@ class _checkerPageState extends State<checkerPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+numberLicense+'"'+" is now registered")
+                                      Text('"'+numberLicense+'"'+" is a modern license number.")
                                     ],
                                   ),
                             ]
@@ -214,7 +214,7 @@ class _checkerPageState extends State<checkerPage> {
                                           ],
                                         ),
                                       ),
-                                      Text('"'+sectionOne+sectionTwo+sectionThree+'"'+" is now registered")
+                                      Text('"'+sectionOne+sectionTwo+sectionThree+'"'+" is  a vintage registration.")
                                     ],
                                   ),
                             ]
@@ -314,7 +314,7 @@ class _checkerPageState extends State<checkerPage> {
                                 borderRadius: BorderRadius.circular(25)
                             ),
                             child: const Text (
-                                "Check Validity",
+                                "Check Vehicle Type",
                                 style: TextStyle (
                                     fontSize: 18.0,
                                     color: Colors.white,

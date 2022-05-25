@@ -1,7 +1,6 @@
-// Page for updating the the saved values in the database
-
 import 'package:flutter/material.dart';
 
+// Page for updating the the saved values in the database
 
 class updateLicense extends StatefulWidget {
   const updateLicense({ Key? key }) : super(key: key);
